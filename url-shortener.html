@@ -1,11 +1,19 @@
- <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.13/clipboard.min.js"></script>
-<link href='https://fonts.googleapis.com/css?family=Roboto:300,300i,500,700,500i,900'/>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Parse Code</title>
+<meta content='width=device-width, initial-scale=1' name='viewport'>
+<script src="https://cdn.jsdelivr.net/clipboard.js/1.5.13/clipboard.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,500,700,500i,900">
 <style>
 body{margin:0;padding:0;font-family:Roboto,Arial,sans-serif}
 .shorten-box{font-size:100%;font-weight:500;color:#666!important;margin:0}
 #output{display:inline-block;}
-.shorten-text{display:inline-block;color:#141924;margin-right:5px;border:1px solid transparent;line-height:1;padding:5px 0;}
-#foo{display:inline-block;background:#f8f8f8;border:1px solid #d5d5d5;border-radius:3px;padding:5px 8px;margin:0;box-shadow: inset 0px 0px 1px rgba(0,0,0,.08);font-family:Consolas,Monaco,'Andale Mono',monospace;font-size:14px;white-space:initial;word-spacing:normal;word-break:normal;hyphens:none;color:#000;cursor:pointer;line-height:1;}
+.shorten-text{display:inline-block;color:#141924;margin-right:5px;border:1px solid transparent;line-height:1;padding:5px 0;font-family:Roboto,Arial,sans-serif;font-weight:700}
+#foo{display:inline-block;background:#f8f8f8;border:1px solid #d5d5d5;border-radius:3px;padding:5px 8px;margin:0;box-shadow: inset 0px 0px 1px rgba(0,0,0,.08);font-family:Consolas,Monaco,'Andale Mono',monospace;font-size:14px;white-space:initial;word-spacing:normal;word-break:normal;hyphens:none;color:#000;cursor:pointer;height: 24px;
+    line-height: 24px;
+    padding: 0 5px;}
 .clear{clear:both}
 #output{position:relative}
 #output .btn {
@@ -21,7 +29,6 @@ body{margin:0;padding:0;font-family:Roboto,Arial,sans-serif}
 button.btn {
   position: relative;
   display: inline-block;
-  padding: 5px 5px 4px;
   font-size: 13px;
   font-weight: bold;
   line-height: 20px;
@@ -38,6 +45,9 @@ button.btn {
   -ms-user-select: none;
   user-select: none;
   -webkit-appearance: none;
+  height: 26px;
+    line-height: 26px;
+    padding: 0 5px;
 }
 
 img.clippy {
@@ -132,25 +142,24 @@ button.btn:focus,button.btn:active{outline:0}
 
 <script>
 var urls = getQueryVariable("url");
-var apis = getQueryVariable("api");
 function getQueryVariable(variable) {
-  var query = window.location.search.substring(1);
-  var vars = query.split("&");
-  for (var i=0;i<vars.length;i++) {
-      var pair = vars[i].split("=");
-      if(pair[0] == variable){return pair[1];}
-  }
-  return(false);
+	var query = window.location.search.substring(1);
+	var vars = query.split("&");
+	for (var i=0;i<vars.length;i++) {
+		var pair = vars[i].split("=");
+		if(pair[0] == variable){return pair[1];}
+	}
+	return(false);
 }
 </script>
-
+</head>
+<body>
 <div class='shorten-box'>
 <script>document.write('<input value="'+ urls +'" id="longurl" name="url" type="hidden"/> '); </script>
- <div class='shorten-text'><b>Share this with short URL:</b></div>
 <div id='output'></div>
 <div class='clear'></div>
   </div>
- 
+  
 
 <script>
 (function() { var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true; po.src = 'https://apis.google.com/js/client.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s); })();
@@ -174,7 +183,7 @@ function makeShort() {
 }
 
 function load() {
-    gapi.client.setApiKey(apis);
+    gapi.client.setApiKey('AIzaSyAzyu1AhDhBhVr2eTKvAV254vhd7bH0bwI');
     gapi.client.load('urlshortener', 'v1', function() {
         document.getElementById("output").innerHTML = makeShort();
     });
@@ -236,3 +245,5 @@ function fallbackMessage(action) {
   return actionMsg;
 }
     </script>
+</body>
+</html>
